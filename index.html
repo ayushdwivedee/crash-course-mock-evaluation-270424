@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mock Evaluation</title>
-</head>
-<body>
-    
-</body>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        background-color: black;
+        padding: 20px 40px;
+        align-items: center;
+      }
+      nav > h1 {
+        color: white;
+        font-family: sans-serif;
+      }
+      nav>div>select,nav>div>input{
+        height: 40px;
+        font-weight: 700;
+        padding: 5px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>Product Listing Page</h1>
+      <div>
+        <select name="" id="category">
+          <option value="">Show All Categories</option>
+          <option value="">men's clothing</option>
+          <option value="">women's clothing</option>
+          <option value="">jewelery</option>
+          <option value="">electronics</option>
+        </select>
+        <input type="search" placeholder="Search Products ..." />
+      </div>
+
+      <div>
+        <select name="" id="sorting">
+          <option value="asc">Price : Low to High</option>
+          <option value="dsc">Price : High to Low</option>
+        </select>
+      </div>
+    </nav>
+  </body>
 </html>
