@@ -61,13 +61,13 @@
       <h1>Product Listing Page</h1>
       <div>
         <select name="" id="category">
-          <option value="">Show All Categories</option>
-          <option value="">men's clothing</option>
-          <option value="">women's clothing</option>
-          <option value="">jewelery</option>
-          <option value="">electronics</option>
+          <option value="null">Show All Categories</option>
+          <option value="men's clothing">men's clothing</option>
+          <option value="women's clothing">women's clothing</option>
+          <option value="jewelery">jewelery</option>
+          <option value="electronics">electronics</option>
         </select>
-        <input type="search" placeholder="Search Products ..." />
+        <input type="search" id="search-bar" placeholder="Search Products ..." />
       </div>
 
       <div>
@@ -134,5 +134,18 @@
     }
   }
 
+let filter=document.getElementById("category")
 
+filter.addEventListener("change",()=>{
+    handleFilter(filter.value)
+})
+
+function handleFilter(value){
+    if(value=="null"){
+        getData(`https://fakestoreapi.com/products`)
+    }else{
+        getData(`https://fakestoreapi.com/products/category/${value}`)
+    }
+     
+}
 </script>
