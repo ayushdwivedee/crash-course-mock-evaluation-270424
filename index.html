@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mock Evaluation</title>
+
     <style>
       body {
         margin: 0;
         padding: 0;
+        font-family: sans-serif;
       }
       nav {
         display: flex;
@@ -20,11 +22,37 @@
         color: white;
         font-family: sans-serif;
       }
-      nav>div>select,nav>div>input{
+      nav > div > select,
+      nav > div > input {
         height: 40px;
         font-weight: 700;
         padding: 5px;
         font-size: 20px;
+      }
+      #container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        width: 60%;
+        margin: auto;
+        margin-top: 40px;
+      }
+      #container > div {
+        border: 1px solid black;
+        border-radius: 7px;
+        padding: 10px;
+        width: 300px;
+      }
+      #container > div > img {
+        width: 150px;
+      }
+      #container > div > p {
+        font-weight: 600;
+        font-size: 22px;
+        color: green;
+      }
+      #container > div > h2 {
+        font-size: 30px;
       }
     </style>
   </head>
@@ -45,9 +73,66 @@
       <div>
         <select name="" id="sorting">
           <option value="asc">Price : Low to High</option>
-          <option value="dsc">Price : High to Low</option>
+          <option value="desc">Price : High to Low</option>
         </select>
       </div>
     </nav>
+
+    <div id="container"></div>
   </body>
 </html>
+
+<script>
+  let cont = document.getElementById("container");
+
+  async function getData(URL) {
+    try {
+      let res = await fetch(URL);
+      let data = await res.json();
+      //   console.log(data);
+      displayData(data);
+      return data;
+    } catch (error) {
+      console.log("Error-", error);
+    }
+  }
+
+  getData("https://fakestoreapi.com/products");
+
+  function displayData(arr) {
+    cont.innerHTML = null;
+    arr.forEach((el, i) => {
+      let card = document.createElement("div");
+      let img = document.createElement("img");
+      let title = document.createElement("h2");
+      let price = document.createElement("p");
+
+      img.src = el.image;
+      title.innerText = el.title;
+      price.innerText = `Price :$${el.price}`;
+
+      card.append(img, title, price);
+      cont.append(card);
+    });
+  }
+
+  let sort = document.getElementById("sorting");
+  sort.addEventListener("change", () => {
+    //   console.log(sort.value)
+    handleSort(sort.value);
+  });
+
+  async function handleSort(value) {
+    let data = await getData(`https://fakestoreapi.com/products`);
+
+    if (value == "asc") {
+      let ascData = data.sort((a, b) => a.price - b.price);
+      displayData(ascData);
+    } else if (value == "desc") {
+      let descData = data.sort((a, b) => b.price - a.price);
+      displayData(descData);
+    }
+  }
+
+  
+</script>
