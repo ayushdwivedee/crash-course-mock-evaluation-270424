@@ -67,7 +67,12 @@
           <option value="jewelery">jewelery</option>
           <option value="electronics">electronics</option>
         </select>
-        <input type="search" id="search-bar" placeholder="Search Products ..." />
+        <input type="search"
+          id="search-bar"
+          value="v"
+          name="name"
+          placeholder="Search Products ..."
+        >
       </div>
 
       <div>
@@ -76,6 +81,7 @@
           <option value="desc">Price : High to Low</option>
         </select>
       </div>
+      
     </nav>
 
     <div id="container"></div>
@@ -84,7 +90,10 @@
 
 <script>
   let cont = document.getElementById("container");
-
+   
+   
+   
+   
   async function getData(URL) {
     try {
       let res = await fetch(URL);
@@ -134,18 +143,21 @@
     }
   }
 
-let filter=document.getElementById("category")
+  let filter = document.getElementById("category");
 
-filter.addEventListener("change",()=>{
-    handleFilter(filter.value)
-})
+  filter.addEventListener("change", () => {
+    handleFilter(filter.value);
+  });
 
-function handleFilter(value){
-    if(value=="null"){
-        getData(`https://fakestoreapi.com/products`)
-    }else{
-        getData(`https://fakestoreapi.com/products/category/${value}`)
+  function handleFilter(value) {
+    if (value == "null") {
+      getData(`https://fakestoreapi.com/products`);
+    } else {
+      getData(`https://fakestoreapi.com/products/category/${value}`);
     }
-     
-}
+  }
+
+  let searc = document.querySelector("input");
+  let myval = searc;
+  console.log(myval.value);
 </script>
